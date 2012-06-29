@@ -171,9 +171,7 @@ void WMWindow::saveSettings()
 
 void WMWindow::slotClose()
 {
-
     m_widget->clearImagesDesc();
-
     m_widget->progressBar()->progressCompleted();
     saveSettings();
     done(Close);
@@ -182,11 +180,11 @@ void WMWindow::slotClose()
 QString WMWindow::getImageCaption(const QString& fileName)
 {
     KPImageInfo info(fileName);
-    // Facebook doesn't support image titles. Include it in descriptions if needed.
     QStringList descriptions = QStringList() << info.title() << info.description();
     descriptions.removeAll("");
     return descriptions.join("\n\n");
 }
+
 bool WMWindow::prepareImageForUpload(const QString& imgPath, QString& caption)
 {
     QImage image;
@@ -230,27 +228,21 @@ bool WMWindow::prepareImageForUpload(const QString& imgPath, QString& caption)
 
     return true;
 }
+
 void WMWindow::slotStartTransfer()
 {
     saveSettings();
     KUrl::List urls = iface()->currentSelection().images();
-
-
     QMap <QString,QMap <QString,QString> > imagesDesc=m_widget->allImagesDesc();
-
 
     for (int i = 0; i < urls.size(); ++i)
     {
-
         QString caption;
         QString url;
-        if(m_widget->resize()){
-
+        if(m_widget->resize())
+        {
             prepareImageForUpload(urls.at(i).path(), caption);
-
-            ;
             imagesDesc.insert(m_tmpPath, imagesDesc.take(urls.at(i).path()));
-
         }
     }
 

@@ -90,17 +90,16 @@ public:
     ~WmWidget();
 
     void updateLabels(const QString& name = QString(), const QString& url = QString());
-
     void invertAccountLoginBox();
 
     KPImagesList* imagesList() const;
-
     KPProgressWidget* progressBar() const;
 
-    QString author() const;
     int dimension() const;
     int quality() const;
     bool resize() const;
+
+    QString author() const;
     QString license() const;
     QString categories() const;
     QString title() const;
@@ -110,8 +109,8 @@ public:
     QString longitude() const;
 
     QMap <QString,QMap <QString,QString> > allImagesDesc();
-    void clearImagesDesc();
 
+    void clearImagesDesc();
     void readSettings(KConfigGroup& group);
     void saveSettings(KConfigGroup& group);
     void loadImageInfoFirstLoad();
@@ -171,7 +170,7 @@ private:
     QCheckBox*                 m_resizeChB;
     QSpinBox*                  m_dimensionSpB;
     QSpinBox*                  m_imageQualitySpB;
-    QComboBox*                 m_licenseComboBox;
+    SqueezedComboBox*          m_licenseComboBox;
 
     KPProgressWidget*          m_progressBar;
 
@@ -179,8 +178,8 @@ private:
     KPImagesList*              m_imgList;
     UploadWidget*              m_uploadWidget;
 
-    QStringList     m_WikisHistory;
-    QStringList     m_UrlsHistory;
+    QStringList                m_WikisHistory;
+    QStringList                m_UrlsHistory;
 
     QMap <QString,QMap <QString,QString> > m_imagesDescInfo;
 
