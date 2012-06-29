@@ -9,6 +9,7 @@
  * Copyright (C) 2011      by Alexandre Mendes <alex dot mendes1988 at gmail dot com>
  * Copyright (C) 2011-2012 by Gilles Caulier <caulier dot gilles at gmail dot com>
  * Copyright (C) 2012      by Parthasarathy Gopavarapu <gparthasarathy93 at gmail dot com>
+ * Copyright (C) 2012      by Peter Potrowl <peter dot potrowl at gmail dot com>
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General
@@ -99,6 +100,9 @@ WMWindow::WMWindow(const QString& tmpFolder, QWidget* const /*parent*/)
 
     about->addAuthor(ki18n("Gilles Caulier"), ki18n("Developer"),
                      "caulier dot gilles at gmail dot com");
+
+    about->addAuthor(ki18n("Peter Potrowl"), ki18n("Developer"),
+                     "peter dot potrowl at gmail dot com");
 
     about->setHandbookEntry("wikimedia");
     setAboutData(about);
