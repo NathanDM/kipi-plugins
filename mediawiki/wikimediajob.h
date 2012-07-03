@@ -79,9 +79,9 @@ private:
     KUrl::List                    m_urls;
     Interface*                    m_interface;
     MediaWiki*                    m_mediawiki;
-    QMap <QString,QMap <QString,QString> > m_imageDesc;
     QString                       m_error;
     QString                       m_currentFile;
+    QMap <QString,QMap <QString,QString> > m_imageDesc;
 };
 
 } // namespace KIPIWikiMediaPlugin

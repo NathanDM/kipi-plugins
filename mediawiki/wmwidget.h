@@ -38,7 +38,6 @@
 #include <klineedit.h>
 #include <ktextedit.h>
 #include <kconfig.h>
-
 #include <kurl.h>
 
 class QLabel;
@@ -91,26 +90,27 @@ public:
     ~WmWidget();
 
     void updateLabels(const QString& name = QString(), const QString& url = QString());
-
     void invertAccountLoginBox();
 
     KPImagesList* imagesList() const;
-
     KPProgressWidget* progressBar() const;
 
-    QString title() const;
-    QString author() const;
     int dimension() const;
     int quality() const;
     bool resize() const;
-    QString categories() const;
+
+    QString author() const;
     QString license() const;
+    QString categories() const;
+    QString title() const;
     QString description() const;
     QString date() const;
+    QString latitude() const;
+    QString longitude() const;
 
     QMap <QString,QMap <QString,QString> > allImagesDesc();
-    void clearImagesDesc();
 
+    void clearImagesDesc();
     void readSettings(KConfigGroup& group);
     void saveSettings(KConfigGroup& group);
     void loadImageInfoFirstLoad();
@@ -119,7 +119,6 @@ Q_SIGNALS:
 
     void signalChangeUserRequest();
     void signalLoginRequest(const QString& login, const QString& pass, const QUrl& wiki);
-    void signalApplyUploadSettings();
 
 private Q_SLOTS:
 
@@ -129,14 +128,15 @@ private Q_SLOTS:
     void slotNewWikiClicked();
     void slotAddWikiClicked();
     void slotLoadImagesDesc(QTreeWidgetItem* item);
-    void slotApplyImagesDesc();
+    void slotApplyTitle();
+    void slotApplyDate();
+    void slotApplyCategories();
+    void slotApplyDescription();
+    void slotApplyLatitude();
+    void slotApplyLongitude();
 
 
 private:
-
-
-
-
 
     KHBox*                     m_uploadBox;
     QWidget*                   m_fileBox;
@@ -146,13 +146,6 @@ private:
     KLineEdit*                 m_longitudeEdit;
     KLineEdit*                 m_latitudeEdit;
     KTextEdit*                 m_categoryEdit;
-
-    QCheckBox*                 m_titleCheck;
-    QCheckBox*                 m_descCheck;
-    QCheckBox*                 m_dateCheck;
-    QCheckBox*                 m_longitudeCheck;
-    QCheckBox*                 m_latitudeCheck;
-    QCheckBox*                 m_categoryCheck;
 
     KVBox*                     m_userBox;
     QWidget*                   m_loginBox;
@@ -177,7 +170,7 @@ private:
     QCheckBox*                 m_resizeChB;
     QSpinBox*                  m_dimensionSpB;
     QSpinBox*                  m_imageQualitySpB;
-    QComboBox*          m_licenseComboBox;
+    SqueezedComboBox*          m_licenseComboBox;
 
     KPProgressWidget*          m_progressBar;
 
@@ -185,11 +178,10 @@ private:
     KPImagesList*              m_imgList;
     UploadWidget*              m_uploadWidget;
 
-    QStringList     m_WikisHistory;
-    QStringList     m_UrlsHistory;
+    QStringList                m_WikisHistory;
+    QStringList                m_UrlsHistory;
 
     QMap <QString,QMap <QString,QString> > m_imagesDescInfo;
-
 
 
     friend class WmWindow;

@@ -8,6 +8,9 @@
  *
  * Copyright (C) 2011 by Alexandre Mendes <alex dot mendes1988 at gmail dot com>
  * Copyright (C) 2011-2012 by Gilles Caulier <caulier dot gilles at gmail dot com>
+ * Copyright (C) 2012 by Nathan Damie <nathan dot damie at gmail dot com>
+ * Copyright (C) 2012 by Iliya Ivanov <iliya dot ivanov at etudiant dot univ dash lille1 dot fr>
+ * Copyright (C) 2012 by Peter Potrowl <peter dot potrowl at gmail dot com>
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General
@@ -162,7 +165,7 @@ QString WikiMediaJob::buildWikiText(const QMap<QString, QString>& info)
     text.append("\n}}");
 
     QString latitude = info["latitude"].toUtf8();
-    QString longitude = info["latitude"].toUtf8();
+    QString longitude = info["longitude"].toUtf8();
     if(!latitude.isEmpty() && !longitude.isEmpty())
     {
 	kDebug() << "Latitude: \"" << latitude << "\"; longitude: \"" << longitude << "\"";
@@ -179,8 +182,6 @@ QString WikiMediaJob::buildWikiText(const QMap<QString, QString>& info)
             text.append("[[Category:").append(categories[i].toUtf8()).append("]]\n");
         }
     }
-
-
 
     return text;
 }
