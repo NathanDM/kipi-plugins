@@ -9,6 +9,7 @@
  * Copyright (C) 2011      by Alexandre Mendes <alex dot mendes1988 at gmail dot com>
  * Copyright (C) 2011-2012 by Gilles Caulier <caulier dot gilles at gmail dot com>
  * Copyright (C) 2012      by Parthasarathy Gopavarapu <gparthasarathy93 at gmail dot com>
+ * Copyright (C) 2012      by Peter Potrowl <peter dot potrowl at gmail dot com>
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General
@@ -100,6 +101,9 @@ WMWindow::WMWindow(const QString& tmpFolder, QWidget* const /*parent*/)
     about->addAuthor(ki18n("Gilles Caulier"), ki18n("Developer"),
                      "caulier dot gilles at gmail dot com");
 
+    about->addAuthor(ki18n("Peter Potrowl"), ki18n("Developer"),
+                     "peter dot potrowl at gmail dot com");
+
     about->setHandbookEntry("wikimedia");
     setAboutData(about);
 
@@ -167,9 +171,7 @@ void WMWindow::saveSettings()
 
 void WMWindow::slotClose()
 {
-
     m_widget->clearImagesDesc();
-
     m_widget->progressBar()->progressCompleted();
     saveSettings();
     done(Close);
@@ -178,11 +180,11 @@ void WMWindow::slotClose()
 QString WMWindow::getImageCaption(const QString& fileName)
 {
     KPImageInfo info(fileName);
-    // Facebook doesn't support image titles. Include it in descriptions if needed.
     QStringList descriptions = QStringList() << info.title() << info.description();
     descriptions.removeAll("");
     return descriptions.join("\n\n");
 }
+
 bool WMWindow::prepareImageForUpload(const QString& imgPath, QString& caption)
 {
     QImage image;
@@ -226,27 +228,21 @@ bool WMWindow::prepareImageForUpload(const QString& imgPath, QString& caption)
 
     return true;
 }
+
 void WMWindow::slotStartTransfer()
 {
     saveSettings();
     KUrl::List urls = iface()->currentSelection().images();
-
-
     QMap <QString,QMap <QString,QString> > imagesDesc=m_widget->allImagesDesc();
-
 
     for (int i = 0; i < urls.size(); ++i)
     {
-
         QString caption;
         QString url;
-        if(m_widget->resize()){
-
+        if(m_widget->resize())
+        {
             prepareImageForUpload(urls.at(i).path(), caption);
-
-            ;
             imagesDesc.insert(m_tmpPath, imagesDesc.take(urls.at(i).path()));
-
         }
     }
 
